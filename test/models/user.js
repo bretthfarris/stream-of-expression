@@ -11,7 +11,7 @@ dotenv.config();
 
 var username = random.generateString();
 
-describe('/lib/mongodb.js', function() {
+describe('User Model', function() {
   before(function (done) {
     db.connect({
       server: process.env.MONGODB_SERVER,

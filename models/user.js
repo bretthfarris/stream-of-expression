@@ -1,11 +1,6 @@
-
 const mongodb = require('../lib/mongodb');
 
 var userSchema = new mongodb.schema({
-  userId: {
-    type: mongodb.schema.Types.ObjectId,
-    auto: true
-  },
   firstName: {
     type: String,
     required: true
@@ -33,4 +28,4 @@ var userSchema = new mongodb.schema({
 // Add plugins
 userSchema.plugin(require('./plugins/timestamp'));
 
-module.exports = mongodb.model('user', userSchema);
+module.exports = mongodb.model('users', userSchema);

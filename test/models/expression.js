@@ -1,21 +1,17 @@
 "use strict";
 const db = require('../../lib/mongodb.js');
+const expressionModel = require('../../models/expression.js');
+const random = require('../../lib/random.js');
+const encryption = require('../../lib/encryption.js');
 const expect = require('chai').expect;
 
 // Import the environment configuration values
 const dotenv = require('dotenv');
 dotenv.config();
 
-// Create a new schema that accepts a 'name' object.
-// 'name' is a required field
-const testSchema = new db.schema({
-  name: { type: String, required: true }
-});
-//Create a new collection called 'Name'
-const Name = db.model('Name', testSchema);
-describe('MongoDB Class', function() {
-  //Before starting the test, create a sandboxed database connection
-  //Once a connection is established invoke done()
+var title = random.generateString();
+
+describe('Expression Model', function() {
   before(function (done) {
     db.connect({
       server: process.env.MONGODB_SERVER,
@@ -37,17 +33,17 @@ describe('MongoDB Class', function() {
     });
   });
   
-  it('New name saved to test database', function(done) {
-    var testName = Name({
-      name: 'Testie McTesterson'
+  it('New expression saved to test database', function(done) {
+    var testExpression = expressionModel({
+      title: title
     });
 
-    testName.save(done);
+    testExpression.save(done);
   });
   it('Dont save incorrect format to database', function(done) {
     //Attempt to save with wrong info. An error should trigger
-    var wrongSave = Name({
-      notName: 'Not Testie McTesterson'
+    var wrongSave = expressionModel({
+      notTitle: 'Not Testie McTesterson'
     });
     wrongSave.save(err => {
       if(err) { return done(); }
@@ -55,10 +51,10 @@ describe('MongoDB Class', function() {
     });
   });
   it('Should retrieve data from test database', function(done) {
-    //Look up the 'Mike' object previously saved.
-    Name.find({name: 'Testie McTesterson'}, (err, name) => {
+    //Look up the user object previously saved.
+    expressionModel.find({title: title}, (err, _title) => {
       if(err) {throw err;}
-      if(name.length === 0) {throw new Error('No data!');}
+      if(_title.length === 0) {throw new Error('No data!');}
       done();
     });
   });
