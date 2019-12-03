@@ -10,6 +10,7 @@
     "test": "test"
   },
   "dependencies": {
+    "crypto": "^1.0.1",
     "dotenv": "^7.0.0",
     "mongoose": "^5.4.20",
     "synergy-logger": "https://github.com/bretthfarris/synergy-logger",
