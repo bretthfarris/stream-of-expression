@@ -6,6 +6,9 @@
   "scripts": {
     "test": "mocha --recursive"
   },
+  "directories": {
+    "test": "test"
+  },
   "dependencies": {
     "dotenv": "^7.0.0",
     "mongoose": "^5.4.20",
