@@ -1,0 +1,19 @@
+{
+  "name": "stream-of-expression",
+  "version": "1.0.0",
+  "description": "Online expression platform.",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --recursive"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bretthfarris/stream-of-expression.git"
+  },
+  "author": "Brett Farris",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bretthfarris/stream-of-expression/issues"
+  },
+  "homepage": "https://github.com/bretthfarris/stream-of-expression#readme"
+}
