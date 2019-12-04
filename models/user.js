@@ -22,6 +22,11 @@ var userSchema = new mongodb.schema({
   password: {
     type: mongodb.schema.Types.Mixed,
     required: true
+  },
+  active: {
+    type: Boolean,
+    required: true,
+    default: true
   }
 });
 

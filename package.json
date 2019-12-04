@@ -4,16 +4,19 @@
   "description": "Online expression platform.",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --recursive"
+    "test": "mocha --recursive --exit"
   },
   "directories": {
     "test": "test"
   },
   "dependencies": {
+    "body-parser": "^1.19.0",
     "crypto": "^1.0.1",
     "dotenv": "^7.0.0",
+    "express": "^4.17.1",
     "mongoose": "^5.4.20",
-    "synergy-logger": "https://github.com/bretthfarris/synergy-logger",
+    "supertest": "^4.0.2",
+    "synergy-logger": "git+https://github.com/bretthfarris/synergy-logger.git",
     "uuid": "^3.3.2"
   },
   "devDependencies": {
