@@ -32,13 +32,23 @@ router.get('/', function(req, res) {
   return res.status(200).json({ "status": "ok" }).end();
 });
 
-// Define the /m/user routes
-logger.log('info', 'Assigning route handlers to /a/user requests')
-const userRoute = require('./routes/m/user');
-router.delete('/m/user', userRoute.delete);
-router.get('/m/user', userRoute.get);
-router.post('/m/user', userRoute.post);
-router.put('/m/user', userRoute.put);
+// Define the administrator only routes
+logger.log('info', 'Assigning route handlers to admin only requests.')
+router.post('/a/create-user', require('./routes/a/create-user').post);
+router.post('/a/update-user', require('./routes/a/update-user').post);
+router.post('/a/create-expression-type', require('./routes/a/create-expression-type').post);
+router.post('/a/update-expression-type', require('./routes/a/update-expression-type').post);
+router.get('/a/get-user', require('./routes/a/get-user').get);
+router.get('/a/disable-user', require('./routes/a/disable-user').get);
+router.get('/a/disable-expression-type', require('./routes/a/disable-expression-type').get);
+router.get('/a/get-expression-type', require('./routes/a/get-expression-type').get);
+router.get('/a/get-expression-types', require('./routes/a/get-expression-types').get);
+
+// Define the moderator+ routes
+logger.log('info', 'Assigning route handlers to mod+ only requests.');
+
+// Define the routes accessible by the plebs
+logger.log('info', 'Assigning route handlers accessible to all the pleb requests.');
 
 // Register our router for Express to use
 app.use('/', router);
