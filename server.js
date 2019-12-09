@@ -20,6 +20,9 @@ db.connect({
 const express = require('express');
 const app = express();
 
+// Set up EJS as the view engine
+app.set('view engine', 'ejs');
+
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true })); // support for URL-encoded bodies
 app.use(bodyParser.json()); // support for JSON-encoded bodies

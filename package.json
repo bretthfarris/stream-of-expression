@@ -4,6 +4,7 @@
   "description": "Online expression platform.",
   "main": "index.js",
   "scripts": {
+    "dev": "gulp",
     "test": "mocha --recursive --exit --no-deprecation"
   },
   "directories": {
@@ -11,16 +12,28 @@
   },
   "dependencies": {
     "body-parser": "^1.19.0",
+    "bootstrap": "^4.4.1",
     "crypto": "^1.0.1",
     "dotenv": "^7.0.0",
+    "ejs": "^3.0.1",
+    "ejs-blocks": "^0.1.4",
     "express": "^4.17.1",
+    "jquery": "^3.4.1",
     "mongoose": "^5.4.20",
+    "popper.js": "^1.16.0",
     "supertest": "^4.0.2",
     "synergy-logger": "git+https://github.com/bretthfarris/synergy-logger.git",
     "uuid": "^3.3.2"
   },
   "devDependencies": {
+    "browser-sync": "^2.26.7",
     "chai": "^4.2.0",
+    "gulp": "^4.0.2",
+    "gulp-clean-css": "^4.2.0",
+    "gulp-debug": "^4.0.0",
+    "gulp-nodemon": "^2.4.2",
+    "gulp-sass": "^4.0.2",
+    "gulp-uglify": "^3.0.2",
     "mocha": "^6.0.2"
   },
   "repository": {
