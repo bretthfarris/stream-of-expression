@@ -22,9 +22,11 @@ const app = express();
 
 // Make the static files in the public directory accessible from the base url.
 const path = require('path');
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static('public'));
 
-// Set up EJS as the view engine
+// Set up EJS with EJS-Blocks as the view engine
+const engine = require('ejs-blocks');
+app.engine('ejs', engine);
 app.set('view engine', 'ejs');
 
 const bodyParser = require('body-parser');
@@ -36,7 +38,7 @@ const router = express.Router();
 
 // Define the default route used for api status check
 router.get('/', function(req, res) { 
-  return res.status(200).json({ "status": "ok" }).end();
+  res.render('index');
 });
 
 // Define the administrator only routes
@@ -62,7 +64,7 @@ app.use('/', router);
 
 // Define the handler for all invalid route requests
 app.use(function(req, res) {
-  res.status(404).json({ "status": "error", "error": "invalid route requested"}).end();
+  res.status(404).json({ "status": "error", "error": "Invalid route requested."}).end();
 });
 
 // Set the app to listen on the port specified in the environment configuration
