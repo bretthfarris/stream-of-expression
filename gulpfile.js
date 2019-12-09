@@ -16,40 +16,27 @@ gulp.task('js', function () {
     .pipe(gulp.dest('public/js/min'));
 });
 
-// create a task that ensures the `js` task is complete before
-// reloading browsers
-gulp.task('js-watch', gulp.series('js', function (done) {
-  browserSync.reload();
-  done();
-}));
-
 // Compile SASS to CSS.
-gulp.task('sass', function(){
+gulp.task('sass', function(done){
   return gulp.src('public/scss/*.scss')
     .pipe(sass().on('error', sass.logError))
     .pipe(minifyCSS({compatibility: 'ie8'}))
-    .pipe(gulp.dest('public/css'))
-    .pipe(browserSync.stream());
+    .pipe(gulp.dest('public/css'));
 });
 
-
-// Setup proxy for local server.
-gulp.task('browser-sync', gulp.series('js','sass', function() {
-  browserSync.init(null, {
-    proxy: "http://localhost:3000",
-    port: 7000,
-  });
-}));
-
-gulp.task('nodemon', gulp.series('browser-sync', function(cb){
+gulp.task('nodemon', function(cb){
   var running = false;
-  return nodemon({script: 'server.js'}).on('start', function(){
+  return nodemon({
+      script: 'server.js',
+      watch: ['server.js', 'routes/', 'public/css/', 'models/', 'public/js/', 'views/'],
+      ext: 'js, css, ejs'
+    }).on('start', function(){
     if(!running) {
       running = true;
       cb();
     }
   });
-}));
+});
 
 gulp.task('init-js', function(done){
   // Copy dependency JS files to the min directory
@@ -72,9 +59,5 @@ gulp.task('init-css', function(done){
 // First, run all your tasks
 gulp.task('default', gulp.series('init-js', 'init-css', 'nodemon', 'sass', 'js', function(){
   // Then watch for changes
-  gulp.watch("public/sass/*.scss", ['sass']);
-  gulp.watch("views/*.ejs").on('change',browserSync.reload);   //Manual Reloading
-
-  // JS changes need to tell browsersync that they're done
-  gulp.watch("public/js/*.js", ['js-watch']);
+  gulp.watch("public/scss/*.scss", gulp.series('sass'));
 }));

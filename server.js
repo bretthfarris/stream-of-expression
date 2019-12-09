@@ -20,6 +20,10 @@ db.connect({
 const express = require('express');
 const app = express();
 
+// Make the static files in the public directory accessible from the base url.
+const path = require('path');
+app.use(express.static(path.join(__dirname, 'public')));
+
 // Set up EJS as the view engine
 app.set('view engine', 'ejs');
 
