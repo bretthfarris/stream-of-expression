@@ -16,7 +16,6 @@
     "crypto": "^1.0.1",
     "dotenv": "^7.0.0",
     "ejs": "^3.0.1",
-    "ejs-blocks": "^0.1.4",
     "express": "^4.17.1",
     "jquery": "^3.4.1",
     "mongoose": "^5.4.20",

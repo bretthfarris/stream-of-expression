@@ -24,10 +24,9 @@ const app = express();
 const path = require('path');
 app.use(express.static('public'));
 
-// Set up EJS with EJS-Blocks as the view engine
-const engine = require('ejs-blocks');
-app.engine('ejs', engine);
+// Set up EJS as the view engine
 app.set('view engine', 'ejs');
+app.set('views', 'views');
 
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true })); // support for URL-encoded bodies
@@ -38,7 +37,7 @@ const router = express.Router();
 
 // Define the default route used for api status check
 router.get('/', function(req, res) { 
-  res.render('index');
+  res.render('default', {app: app});
 });
 
 // Define the administrator only routes

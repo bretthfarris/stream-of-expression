@@ -90,7 +90,7 @@ describe("Route Testing", function() {
       });
     });
     describe("POST /a/update-expression-type", function() {
-      it('updates the previously created Expression Type with an _id of ' + expressionType.expressionTypeId, function(done){
+      it('updates the previously created Expression Type with an _id of ' + expressionType._id, function(done){
         var params = { "expressionTypeId": expressionType.expressionTypeId, "type": random.generateString() };
         request.post('/a/update-expression-type').send(params).end(function(err, res) {
           expect(res.status).to.eql(200);
@@ -108,7 +108,7 @@ describe("Route Testing", function() {
     });
     describe("GET /a/disable-expression-type", function() {
       it('disables the previously created Expression Type', function(done){
-        request.get('/a/disable-expression-type').send({expressionTypeId: expressionType.expressionTypeId}).end(function(err, res) {
+        request.get('/a/disable-expression-type').send({expressionTypeId: expressionType._id}).end(function(err, res) {
           expect(res.status).to.eql(200);
           done(err);
         });
