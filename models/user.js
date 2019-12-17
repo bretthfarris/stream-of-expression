@@ -1,4 +1,5 @@
 const mongodb = require('../lib/mongodb');
+const encryption = require('../lib/encryption');
 
 var userSchema = new mongodb.schema({
   firstName: {
@@ -21,7 +22,9 @@ var userSchema = new mongodb.schema({
   },
   password: {
     type: mongodb.schema.Types.Mixed,
-    required: true
+    required: true,
+    get: getPassword,
+    set: setPassword
   },
   role: {
     type: String,
@@ -35,6 +38,14 @@ var userSchema = new mongodb.schema({
     default: true
   }
 });
+
+function getPassword(encryptedText) {
+  return encryption.decrypt(encryptedText);
+}
+
+function setPassword(plainText) {
+  return encryption.encrypt(plainText);
+}
 
 // Add plugins
 userSchema.plugin(require('./plugins/timestamp'));

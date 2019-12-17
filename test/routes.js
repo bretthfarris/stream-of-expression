@@ -14,7 +14,6 @@ const server = require('../server');
 const request = supertest(server);
 const random = require('../lib/random');
 const dbname = "test_" + random.generateString();
-const encryption = require('../lib/encryption');
 
 describe("Route Testing", function() {
   //Before starting the tests, create a sandboxed database connection
@@ -39,7 +38,7 @@ describe("Route Testing", function() {
       "lastName": "McTesterson",
       "username": random.generateString(),
       "email": "test" + random.generateString() + "&" + "streamofexpression.com",
-      "password": encryption.encrypt(random.generateString())
+      "password": random.generateString()
     };
     describe("POST /a/create-user", function() {
       it('creates a User and returns the userId', function(done){
